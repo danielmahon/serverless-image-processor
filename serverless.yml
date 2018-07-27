@@ -1,5 +1,6 @@
-service:
-  name: serverless-image-processor
+service: serverless-image-processor
+app: serverless-image-processor
+tenant: danielmahon
 
 plugins:
   - serverless-webpack

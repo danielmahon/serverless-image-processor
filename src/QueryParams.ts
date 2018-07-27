@@ -47,6 +47,12 @@ export interface QueryParams {
   webp?: boolean;
 
   /**
+   * Converts the input image to png.
+   * Default: false
+   */
+  png?: boolean;
+
+  /**
    * Specifies the output quality for jpg and webp.
    * Allowed values: 1 - 100
    * Default: 75

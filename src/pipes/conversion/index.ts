@@ -27,6 +27,13 @@ export const convert = curry(
       };
     }
 
+    if (toBoolean(queryParams.png)) {
+      return {
+        mime: 'image/png',
+        transformer: png(queryParams, transformer)
+      };
+    }
+
     switch (inputMime) {
       case 'image/gif':
       case 'image/jpeg':
@@ -34,6 +41,7 @@ export const convert = curry(
           mime: 'image/jpeg',
           transformer: jpeg(queryParams, transformer)
         };
+      case 'image/svg+xml':
       case 'image/png':
         return {
           mime: 'image/png',

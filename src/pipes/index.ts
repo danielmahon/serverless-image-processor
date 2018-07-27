@@ -4,9 +4,17 @@ import { InputQueryParams } from '../QueryParams';
 import { manipulate } from './manipulation';
 import { convert } from './conversion';
 
-export type SupportedInputMime = 'image/jpeg' | 'image/gif' | 'image/png';
+export type SupportedInputMime =
+  | 'image/jpeg'
+  | 'image/gif'
+  | 'image/png'
+  | 'image/svg+xml';
 
-export type SupportedOutputMime = 'image/jpeg' | 'image/webp' | 'image/png';
+export type SupportedOutputMime =
+  | 'image/jpeg'
+  | 'image/webp'
+  | 'image/png'
+  | 'image/svg+xml';
 
 export type PipeOutput = {
   transformer: SharpInstance;
@@ -16,7 +24,15 @@ export type PipeOutput = {
 export function isSupportedInputMime(
   mime: string | null
 ): mime is SupportedInputMime {
-  return ['image/jpeg', 'image/gif', 'image/png'].some(x => x === mime);
+  return ['image/jpeg', 'image/gif', 'image/png', 'image/svg+xml'].some(
+    x => x === mime
+  );
+}
+
+export function isBase64Supported(
+  mime: string | null
+): mime is SupportedOutputMime {
+  return ['image/jpeg', 'image/webp', 'image/png'].some(x => x === mime);
 }
 
 export const createPipe = (

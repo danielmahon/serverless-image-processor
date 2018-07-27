@@ -23,6 +23,20 @@ export const handle = (
       return cb(null, { statusCode: 500 });
     }
 
+    if (inputMime === 'image/svg+xml' && !event.queryStringParameters) {
+      let body = '';
+      await inputStream.on('data', data => {
+        body = data.toString();
+      });
+      const response = {
+        statusCode: 200,
+        headers: { 'Content-Type': inputMime },
+        body: body,
+        isBase64Encoded: false
+      };
+      return cb(null, response);
+    }
+
     const { transformer, mime } = createPipe(
       event.queryStringParameters || {},
       inputMime,
@@ -34,9 +48,7 @@ export const handle = (
 
       const response = {
         statusCode: 200,
-        headers: {
-          'Content-Type': mime
-        },
+        headers: { 'Content-Type': mime },
         body: image.toString('base64'),
         isBase64Encoded: true
       };
